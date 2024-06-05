@@ -1,4 +1,4 @@
-import 'dart:ffi';
+// import 'dart:ffi';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +19,7 @@ class _HomeState extends State<Home> {
   int filledBoxes = 0;
   int scoreX = 0;
   int scoreO = 0;
+  String winnerTitle = '';
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +53,7 @@ class _HomeState extends State<Home> {
             SizedBox(
               height: 40,
             ),
+            getResultButton(),
             getgrid(),
             getTrun(),
             SizedBox(
@@ -221,7 +223,7 @@ class _HomeState extends State<Home> {
         xOroList[2] == xOroList[6] &&
         xOroList[2] != '') {
       print('winner is ' + xOroList[0]);
-      setResult(xOroList[0], 'winner is ' + xOroList[0]); 
+      setResult(xOroList[0], 'winner is ' + xOroList[0]);
       return;
     }
 
@@ -233,7 +235,7 @@ class _HomeState extends State<Home> {
   void setResult(String winner, String title) {
     setState(() {
       gameHasResult = true;
-
+      winnerTitle = title;
       if (winner == 'X') {
         scoreX++;
       } else if (winner == 'O') {
@@ -243,6 +245,25 @@ class _HomeState extends State<Home> {
         scoreX = scoreX;
       }
     });
+  }
+
+  Widget getResultButton() {
+    return OutlinedButton(
+        style: OutlinedButton.styleFrom(
+            side: BorderSide(
+          color: Colors.white,
+        )),
+        onPressed: () {
+          setState(() {
+            gameHasResult = false;
+            clearGame();
+          });
+        },
+        child: Text(
+          '$winnerTitle',
+          style: TextStyle(
+              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+        ));
   }
 
   Widget getTrun() {
