@@ -20,6 +20,7 @@ class _HomeState extends State<Home> {
   int scoreX = 0;
   int scoreO = 0;
   String winnerTitle = '';
+  bool box = true;
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +55,9 @@ class _HomeState extends State<Home> {
               height: 40,
             ),
             getResultButton(),
+            SizedBox(
+              height: 40,
+            ),
             getgrid(),
             getTrun(),
             SizedBox(
@@ -167,6 +171,9 @@ class _HomeState extends State<Home> {
   }
 
   void checkWinner() {
+    if (gameHasResult) {
+      return;
+    }
     // Rows
     if (xOroList[0] == xOroList[1] &&
         xOroList[0] == xOroList[2] &&
@@ -249,22 +256,25 @@ class _HomeState extends State<Home> {
   }
 
   Widget getResultButton() {
-    return OutlinedButton(
-        style: OutlinedButton.styleFrom(
-            side: BorderSide(
-          color: Colors.white,
-        )),
-        onPressed: () {
-          setState(() {
-            gameHasResult = false;
-            clearGame();
-          });
-        },
-        child: Text(
-          '$winnerTitle, play again!',
-          style: TextStyle(
-              color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
-        ));
+    return Visibility(
+      visible: gameHasResult,
+      child: OutlinedButton(
+          style: OutlinedButton.styleFrom(
+              side: BorderSide(
+            color: Colors.white,
+          )),
+          onPressed: () {
+            setState(() {
+              gameHasResult = false;
+              clearGame();
+            });
+          },
+          child: Text(
+            '$winnerTitle, play again!',
+            style: TextStyle(
+                color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
+          )),
+    );
   }
 
   Widget getTrun() {
