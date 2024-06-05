@@ -229,6 +229,7 @@ class _HomeState extends State<Home> {
 
     if (filledBoxes == 9) {
       print('game is end ');
+      setResult('', 'game is end ');
     }
   }
 
