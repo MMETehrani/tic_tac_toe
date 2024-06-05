@@ -260,7 +260,7 @@ class _HomeState extends State<Home> {
           });
         },
         child: Text(
-          '$winnerTitle',
+          '$winnerTitle, play again!',
           style: TextStyle(
               color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),
         ));
