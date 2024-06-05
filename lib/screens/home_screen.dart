@@ -151,6 +151,9 @@ class _HomeState extends State<Home> {
   }
 
   void tapped(int index) {
+    if (gameHasResult) {
+      return;
+    }
     print('tapped $index');
     setState(() {
       if (xOroList[index] == '') {
@@ -171,9 +174,6 @@ class _HomeState extends State<Home> {
   }
 
   void checkWinner() {
-    if (gameHasResult) {
-      return;
-    }
     // Rows
     if (xOroList[0] == xOroList[1] &&
         xOroList[0] == xOroList[2] &&
